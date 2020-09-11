@@ -1,0 +1,17 @@
+name: Jira Add Comment
+description: Add a comment to a Jira issue
+inputs:
+  issue:
+    description: Key of the issue to be commented on
+    required: true
+  comment:
+    description: The comment to add
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - run: cd ${GITHUB_ACTION_PATH} && go run main.go
+      shell: bash
+      env:
+        INPUT_ISSUE: ${{ inputs.issue }}
+        INPUT_COMMENT: ${{ inputs.comment }}
