@@ -9,7 +9,6 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/kalafut/m2j"
 	"github.com/tomhjp/gh-action-jira/config"
 	"github.com/tomhjp/gh-action-jira/jira"
 )
@@ -47,7 +46,7 @@ func addComment(config config.JiraConfig, issue, comment string) error {
 	payload := struct {
 		Body string `json:"body"`
 	}{
-		Body: m2j.MDToJira(comment),
+		Body: comment,
 	}
 	reqBody, err := json.Marshal(payload)
 	if err != nil {
