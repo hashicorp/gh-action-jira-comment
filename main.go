@@ -10,6 +10,7 @@ import (
 	"os"
 
 	"github.com/tomhjp/gh-action-jira/config"
+	"github.com/tomhjp/gh-action-jira/format"
 	"github.com/tomhjp/gh-action-jira/jira"
 )
 
@@ -30,6 +31,11 @@ func comment() error {
 	config, err := config.ReadConfig()
 	if err != nil {
 		return err
+	}
+
+	comment, err = format.GitHubToJira(comment)
+	if err != nil {
+		return fmt.Errorf("failed to convert GitHub markdown to Jira: %w", err)
 	}
 
 	err = addComment(config, issue, comment)
